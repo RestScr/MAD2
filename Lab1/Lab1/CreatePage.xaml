@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab1.CreatePage"
+             Title="CreatePage">
+    <VerticalStackLayout>
+        <Entry
+            x:Name="TitleEntry"
+            Placeholder="Введите название (Обязательно)"/>
+        <Entry
+            x:Name="DescriptionEntry"
+            Placeholder="Введите описание"/>
+        
+        <DatePicker 
+            x:Name="DatePick"
+            />
+        <HorizontalStackLayout>
+            <Button
+                Text="Сохранить"
+                x:Name="SaveButton"
+                Clicked="SaveButton_Clicked"/>
+            <Button
+                Text="Отменить"
+                x:Name="CancelButton"
+                Clicked="CancelButton_Clicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

@@ -4,33 +4,94 @@
              x:Class="Lab1.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+        <StackLayout 
+                Orientation="Vertical">
 
-            <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+            <Border
+                StrokeShape="RoundRectangle 15"
+                StrokeThickness="1">
+                <CollectionView
+                    x:Name="NoteList"
+                    HeightRequest="300"
+                    BackgroundColor="Black"
+                    SelectionMode="Single"
+                    SelectionChanged="NoteList_SelectionChanged">
 
-            <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                StrokeShape="RoundRectangle 15">
+                                
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="#C573C5"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter
+                                                        Property="BackgroundColor"
+                                                        Value="#804B80"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                                
+                                <VerticalStackLayout>
+                                    <Label
+                                            Text="{Binding Title}"
+                                            FontSize="14"
+                                            Padding="3"
+                                            />
+                                    <HorizontalStackLayout>
+                                        <Label
+                                                Text="Дата создания:"
+                                                Padding="2"/>
+                                        <Label
+                                                Text="{Binding Created}"
+                                                Padding="2"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label
+                                                Text="Дата изменения:"
+                                                Padding="2"/>
+                                        <Label
+                                                Text="{Binding Updated}"
+                                                Padding="2"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
-        </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </Border>
+
+            <HorizontalStackLayout>
+                <Button
+                    x:Name="CreateNoteButton"
+                    Clicked="OnCreateClicked"
+                    Text="Создать"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    />
+                <Button
+                    x:Name="EditNoteButton"
+                    Text="Изменить"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    Clicked="OnEditClicked"
+                    />
+            </HorizontalStackLayout>
+        </StackLayout>
+
     </ScrollView>
 
 </ContentPage>
