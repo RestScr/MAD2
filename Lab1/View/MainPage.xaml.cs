@@ -51,10 +51,34 @@ public partial class MainPage : ContentPage
         if (SelectedNote == null)
         {
             EditNoteButton.IsEnabled = false;
+            DeleteNoteButton.IsEnabled = false;
         }
         else
         {
             EditNoteButton.IsEnabled = true;
+            DeleteNoteButton.IsEnabled = true;
         }
+    }
+
+    private void OnDeleteClicked(object sender, EventArgs e)
+    {
+        if (SelectedNote == null)
+        {
+            return;
+        }
+        int index = Notes.IndexOf(SelectedNote);
+        Notes.Remove(SelectedNote);
+        index--;
+
+        if (index > -1)
+        {
+            SelectedNote = Notes[index];
+        }
+        else
+        {
+            SelectedNote = null;
+        }
+
+        NoteList.SelectedItem = SelectedNote;
     }
 }

@@ -88,6 +88,15 @@
                     WidthRequest="100"
                     HeightRequest="50"
                     Clicked="OnEditClicked"
+                    IsEnabled="False"
+                    />
+                <Button
+                    x:Name="DeleteNoteButton"
+                    Text="Удалить"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    Clicked="OnDeleteClicked"
+                    IsEnabled="False"
                     />
             </HorizontalStackLayout>
         </StackLayout>
