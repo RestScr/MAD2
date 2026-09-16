@@ -46,6 +46,7 @@ public partial class CreatePage : ContentPage
                 EditingNote.Title = title;
                 EditingNote.Description = description;
                 EditingNote.PickedDateTime = date;
+                EditingNote.Updated = DateTime.Now;
             }
             Navigation.PopAsync();
         }
