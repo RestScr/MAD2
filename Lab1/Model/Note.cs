@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using SQLite;
 
 namespace Model;
 
 /// <summary>
 /// Класс заметки
 /// </summary>
+[Table("note")]
 public class Note : INotifyPropertyChanged
 {
     /// <summary>
@@ -43,11 +45,13 @@ public class Note : INotifyPropertyChanged
     /// <summary>
     /// Идентификатор заметки.
     /// </summary>
-    public int Id { get; init; } = IdGenerator.GenerateId(nameof(Note));
+    [PrimaryKey, AutoIncrement, Column("_id")]
+    public int Id { get; init; }
 
     /// <summary>
     /// Название заметки.
     /// </summary>
+    [MaxLength(250)]
     public string Title
     {
         get
@@ -69,6 +73,7 @@ public class Note : INotifyPropertyChanged
     /// <summary>
     /// Текст заметки.
     /// </summary>
+    [MaxLength(500)]
     public string Description
     { 
         get
@@ -141,6 +146,11 @@ public class Note : INotifyPropertyChanged
         Description = description;
         Created = DateTime.Now;
         PickedDateTime = pickedDateTime;
+    }
+
+    public Note()
+    {
+
     }
 }
 

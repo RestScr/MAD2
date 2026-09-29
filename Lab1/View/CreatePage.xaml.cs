@@ -3,7 +3,6 @@ using Model;
 
 namespace Lab1;
 
-
 public partial class CreatePage : ContentPage
 {
     Note? EditingNote { get; set; } = null;
