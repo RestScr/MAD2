@@ -1,12 +1,18 @@
-using System.Diagnostics;
 using Model;
 
 namespace Lab1;
 
 public partial class CreatePage : ContentPage
 {
+    /// <summary>
+    /// Свойство редактируемой заметки.
+    /// </summary>
     Note? EditingNote { get; set; } = null;
 
+    /// <summary>
+    /// Конструктор страницы создания.
+    /// </summary>
+    /// <param name="selectedNote"></param>
 	public CreatePage(Note? selectedNote)
 	{
         EditingNote = selectedNote;
@@ -51,7 +57,6 @@ public partial class CreatePage : ContentPage
             }
             await Navigation.PopAsync();
             NoteEntered?.Invoke(this, EditingNote);
-            Debug.WriteLine("dffdsddsfdfssdf");
         }
         catch (ArgumentException)
         {

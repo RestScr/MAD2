@@ -1,23 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 
 namespace Model;
 
 /// <summary>
-/// Класс оператора с локальной БД.
+/// Синглтон класс оператора с локальной БД.
 /// </summary>
 public class SQLiteOperator
 {
-    private string Filename { get; set; }
+    /// <summary>
+    /// Частное свойство местонахождения файла БД.
+    /// </summary>
+    private string Filename { get; set; } = "DailyPlanner.db";
+
+    /// <summary>
+    /// Экземпляр асинхронного соединения к БД.
+    /// </summary>
     public SQLiteAsyncConnection AsyncConnection { get; set; }
+
+    /// <summary>
+    /// Экземпляр синхронного соединения к БД.
+    /// </summary>
     public SQLiteConnection Connection { get; set; }
 
+    /// <summary>
+    /// Статический частный экземпляр сущности синглтона.
+    /// </summary>
     private static SQLiteOperator? _instance = null;
 
+    /// <summary>
+    /// Свойство получение сущности синглтона.
+    /// </summary>
     public static SQLiteOperator Instance 
     { 
         get
@@ -31,9 +43,11 @@ public class SQLiteOperator
         }
     }
 
+    /// <summary>
+    /// Закрытый конструктор синглтона.
+    /// </summary>
     private SQLiteOperator()
     {
-        Filename = "DailyPlanner.db";
         AsyncConnection = new SQLiteAsyncConnection(Filename);
         Connection = new SQLiteConnection(Filename);
         AsyncConnection.CreateTableAsync<Note>();

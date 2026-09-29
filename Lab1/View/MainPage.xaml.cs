@@ -1,15 +1,23 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using Model;
 
 namespace Lab1;
 
 public partial class MainPage : ContentPage
 {
+    /// <summary>
+    /// Свойство выбранной заметки.
+    /// </summary>
     public Note? SelectedNote { get; set; } = null;
 
+    /// <summary>
+    /// Свойство списка с заметками.
+    /// </summary>
     public ObservableCollection<Note> Notes { get; set; } = new ObservableCollection<Note>();
 
+    /// <summary>
+    /// Стандартный конструктор главной страницы.
+    /// </summary>
     public MainPage()
     {
         
@@ -19,6 +27,11 @@ public partial class MainPage : ContentPage
         NoteList.ItemsSource = Notes;
     }
 
+    /// <summary>
+    /// Функция, срабатывающая при нажатии кнопки изменения.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnEditClicked(object sender, EventArgs e)
     {
         if (SelectedNote == null)
@@ -29,6 +42,11 @@ public partial class MainPage : ContentPage
         Navigation.PushAsync(createPage);
     }
 
+    /// <summary>
+    /// Функция, срабатывающая при нажатии кнопки создания.
+    /// </summary>
+    /// <param name="sender"> Отправитель события </param>
+    /// <param name="e"> Аргументы события. </param>
     private void OnCreateClicked(object sender, EventArgs e)
     {
         CreatePage createPage = new CreatePage(null);
@@ -36,6 +54,12 @@ public partial class MainPage : ContentPage
         Navigation.PushAsync(createPage);
     }
 
+    /// <summary>
+    /// Функция события обновления или создания заметки, 
+    /// которая обновляет основной список заметок.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="note"></param>
     private void OnNoteEnteredOrUpdated(object sender, Note? note)
     {
         if (note == null)
@@ -43,11 +67,15 @@ public partial class MainPage : ContentPage
             return;
         }
         List<Note> table = SQLiteOperator.Instance.Connection.Table<Note>().ToList();
-        Debug.WriteLine(table.Count);
         Notes = new ObservableCollection<Note>(table);
         NoteList.ItemsSource = Notes;
     }
 
+    /// <summary>
+    /// Функция, вызывающаяся при изменении выбранной заметки.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void NoteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         SelectedNote = (Note?)e.CurrentSelection.FirstOrDefault();
@@ -64,6 +92,11 @@ public partial class MainPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Функция клиика на кнопку удаления.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         if (SelectedNote == null)
