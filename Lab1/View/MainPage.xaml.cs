@@ -103,6 +103,8 @@ public partial class MainPage : ContentPage
         {
             return;
         }
+
+        SQLiteOperator.Instance.Connection.Delete(SelectedNote);
         int index = Notes.IndexOf(SelectedNote);
         Notes.Remove(SelectedNote);
         index--;
