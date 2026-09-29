@@ -15,7 +15,8 @@
                     HeightRequest="300"
                     BackgroundColor="Black"
                     SelectionMode="Single"
-                    SelectionChanged="NoteList_SelectionChanged">
+                    SelectionChanged="NoteList_SelectionChanged"
+                    ItemsSource="{Binding Notes}">
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

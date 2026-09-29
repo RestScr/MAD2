@@ -13,11 +13,12 @@ namespace Model;
 public class SQLiteOperator
 {
     private string Filename { get; set; }
-    public SQLiteAsyncConnection Connection { get; set; }
+    public SQLiteAsyncConnection AsyncConnection { get; set; }
+    public SQLiteConnection Connection { get; set; }
 
     private static SQLiteOperator? _instance = null;
 
-    public static SQLiteOperator? Instance 
+    public static SQLiteOperator Instance 
     { 
         get
         {
@@ -33,7 +34,8 @@ public class SQLiteOperator
     private SQLiteOperator()
     {
         Filename = "DailyPlanner.db";
-        Connection = new SQLiteAsyncConnection(Filename);
-        Connection.CreateTableAsync<Note>();
+        AsyncConnection = new SQLiteAsyncConnection(Filename);
+        Connection = new SQLiteConnection(Filename);
+        AsyncConnection.CreateTableAsync<Note>();
     }
 }

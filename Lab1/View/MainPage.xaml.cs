@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Model;
 
 namespace Lab1;
@@ -11,8 +12,10 @@ public partial class MainPage : ContentPage
 
     public MainPage()
     {
+        
         InitializeComponent();
-
+        List<Note> table = SQLiteOperator.Instance.Connection.Table<Note>().ToList();
+        Notes = new ObservableCollection<Note>(table);
         NoteList.ItemsSource = Notes;
     }
 
@@ -29,18 +32,20 @@ public partial class MainPage : ContentPage
     private void OnCreateClicked(object sender, EventArgs e)
     {
         CreatePage createPage = new CreatePage(null);
-        createPage.NoteEntered += OnNoteEntered;
+        createPage.NoteEntered += OnNoteEnteredOrUpdated;
         Navigation.PushAsync(createPage);
     }
 
-    private void OnNoteEntered(object sender, Note? note)
+    private void OnNoteEnteredOrUpdated(object sender, Note? note)
     {
         if (note == null)
         {
             return;
         }
-
-        Notes.Add(note);
+        List<Note> table = SQLiteOperator.Instance.Connection.Table<Note>().ToList();
+        Debug.WriteLine(table.Count);
+        Notes = new ObservableCollection<Note>(table);
+        NoteList.ItemsSource = Notes;
     }
 
     private void NoteList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -27,7 +27,7 @@ public partial class CreatePage : ContentPage
     /// </summary>
     /// <param name="sender"> Объект, пославший событие. </param>
     /// <param name="e"> Параметры события. </param>
-    private void SaveButton_Clicked(object sender, EventArgs e)
+    private async void SaveButton_Clicked(object sender, EventArgs e)
     {
         string title = TitleEntry.Text;
         string description = DescriptionEntry.Text;
@@ -38,7 +38,8 @@ public partial class CreatePage : ContentPage
             if (EditingNote == null)
             {
                 Note newNote = new Note(title, description, date);
-                NoteEntered?.Invoke(this, newNote);
+                EditingNote = newNote;
+                await SQLiteOperator.Instance.AsyncConnection.InsertAsync(EditingNote);
             }
             else
             {
@@ -46,8 +47,11 @@ public partial class CreatePage : ContentPage
                 EditingNote.Description = description;
                 EditingNote.PickedDateTime = date;
                 EditingNote.Updated = DateTime.Now;
+                await SQLiteOperator.Instance.AsyncConnection.UpdateAsync(EditingNote);
             }
-            Navigation.PopAsync();
+            await Navigation.PopAsync();
+            NoteEntered?.Invoke(this, EditingNote);
+            Debug.WriteLine("dffdsddsfdfssdf");
         }
         catch (ArgumentException)
         {
