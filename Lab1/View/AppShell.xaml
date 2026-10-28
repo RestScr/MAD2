@@ -6,9 +6,24 @@
     xmlns:local="clr-namespace:Lab1"
     Title="Простой Ежедневник">
 
+    <Shell.FlyoutHeader>
+        <Label
+            Text="Меню"/>
+    </Shell.FlyoutHeader>
+
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <MenuItem
+        Text="Темная тема"
+        Clicked="OnDarkThemeClicked"
+        />
+    
+    <MenuItem
+        Text="Светлая тема"
+        Clicked="OnLightThemeClicked"
+        />
 
 </Shell>

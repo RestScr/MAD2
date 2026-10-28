@@ -13,7 +13,6 @@
                 <CollectionView
                     x:Name="NoteList"
                     HeightRequest="300"
-                    BackgroundColor="Black"
                     SelectionMode="Single"
                     SelectionChanged="NoteList_SelectionChanged"
                     ItemsSource="{Binding Notes}">
@@ -37,7 +36,7 @@
                                                 <VisualState.Setters>
                                                     <Setter
                                                         Property="BackgroundColor"
-                                                        Value="#804B80"/>
+                                                        Value="{DynamicResource BackgroundColor}"/>
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
