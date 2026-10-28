@@ -26,6 +26,12 @@
                 <Setter
                     Property="BackgroundColor"
                     Value="{DynamicResource ButtonColor}"/>
+                <Setter
+                    Property="WidthRequest"
+                    Value="100"/>
+                <Setter
+                    Property="HeightRequest"
+                    Value="50"/>
             </Style>
 
             <Style TargetType="CollectionView">
