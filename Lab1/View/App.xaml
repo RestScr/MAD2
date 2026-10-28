@@ -9,6 +9,31 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ContentPage">
+                <Setter 
+                    Property="BackgroundColor"
+                    Value="{DynamicResource BackgroundColor}"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter
+                    Property="TextColor"
+                    Value="{DynamicResource TextColor}"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter
+                    Property="BackgroundColor"
+                    Value="{DynamicResource ButtonColor}"/>
+            </Style>
+
+            <Style TargetType="CollectionView">
+                <Setter
+                    Property="BackgroundColor"
+                    Value="{DynamicResource BackgroundColor}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
+    
 </Application>
