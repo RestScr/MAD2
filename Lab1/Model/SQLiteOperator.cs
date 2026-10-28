@@ -51,5 +51,6 @@ public class SQLiteOperator
         AsyncConnection = new SQLiteAsyncConnection(Filename);
         Connection = new SQLiteConnection(Filename);
         Connection.CreateTable<Note>();
+        Connection.CreateTable<AppConfig>();
     }
 }
